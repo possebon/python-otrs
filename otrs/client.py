@@ -315,8 +315,11 @@ class GenericInterfaceClient(object):
         self.password = None
         self.session_id = None
         self.ssl_context = ssl_context
-        self.giurl = urljoin(
-            server, 'otrs/nph-genericinterface.pl/Webservice/')
+        # If the OTRS is installed without /otrs/ virtual directory,
+        # this will not work.
+        #self.giurl = urljoin(
+        #    server, 'otrs/nph-genericinterface.pl/Webservice/')
+        self.giurl = server # this change will work without /otrs/ on server_uri
 
     def register_credentials(self, login, password):
         """Save the identifiers in memory.
